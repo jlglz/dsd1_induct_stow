@@ -396,16 +396,18 @@
 					<section class="col-md-12 goldie">
 						<h3>GOLDIE LOCKS</h3>
 						<form action="">
-							<input type="text" name = "last_name" value = "TARGET VOLUME">
-							<input type="text" name = "last_name" value = "BELT RUN TIME">
-							<input type="text" name = "last_name" value = "XTRA MARGIN">
-							<button>CALCULATE</button>
+							<input id="targetVolume" type="text" name = "last_name" value = "TARGET VOLUME">
+							<input id="beltRunTime" type="text" name = "last_name" value = "BELT RUN TIME">
+							<input id="xtraMargin" type="text" name = "last_name" value = "XTRA MARGIN">
+							<input type="submit" id="calcMinReqFlowBtn"/>
+							<!-- <button id="calcMinReqFlowBtn">CALCULATE</button> -->
 							
 						</form>
 						<div class="flow_output">
 							<h3>MINIMUM REQUIRED FLOW</h3>
-							<p>0000 <span class="flowUnit">FPH</span></p> <span class="pipeBreak">|</span> 
-							<p>00 <span class="flowUnit">FPM</span></p>
+							<p class="fph_output" >0000 <span class="flowUnit">FPH</span></p>
+							<span class="pipeBreak">|</span> 
+							<p class="fpm_output" >00 <span class="flowUnit">FPM</span></p>
 						</div>
 					</section>
 					<div id='test_data'></div>
@@ -468,27 +470,58 @@
 					//     } )
 					// } );
 
-					var url = "https://crossorigin.me/https://first-test-react-pp.herokuapp.com/adpanel";
-					fetch(url)
-					  .then(function() {
-					    // handle the response
-					      $(html).find("ul").find("li").each( function(){
-						        var text = $(this).text();
-						        // Do something with content
-						        console.log(text);
-						       	$('#test_data').append($('p',data));
-					    	})
-					  })
-					  .catch(function(error) {
-					    // handle the error
-					    console.log(error)
-					  });
+					// var url = "https://crossorigin.me/https://first-test-react-pp.herokuapp.com/adpanel";
+					// fetch(url)
+					//   .then(function() {
+					//     // handle the response
+					//       $(html).find("ul").find("li").each( function(){
+					// 	        var text = $(this).text();
+					// 	        // Do something with content
+					// 	        console.log(text);
+					// 	       	$('#test_data').append($('p',data));
+					//     	})
+					//   })
+					//   .catch(function(error) {
+					//     // handle the error
+					//     console.log(error)
+					//   });
+
+
+
+
+					// MINIMUM FLOW CALCULATOR
+
+					// on button click - calculate
+					$('#calcMinReqFlowBtn').on('click', function() {
+
+					  	console.log("i was pressed");
+						var targetVolume = $('#targetVolume').val();
+						var beltRunTime = $('#beltRunTime').val();
+						var xtraMargin = $('#xtraMargin').val();
+
+
+						function calculateMinimumRequiredFlow(targetVolume, beltRunTime, xtraMargin){
+							var flowPerHour = parseInt(targetVolume) / parseInt(beltRunTime) + parseInt(xtraMargin);
+							var flowPerMin = flowPerHour / 60;
+
+							console.log("I calc the results " + flowPerHour + " & " + flowPerMin);
+							return results;
+						}
+
+						var minflowRate = calculateMinimumRequiredFlow();
+					  	console.log("i was pressed");
+
+					  	$(".fph_output").text('2000');
+					  	$(".fpm_output").text('10');
+
+					  	console.log(minflowRate);
+					});
 
 
 					// animate induct color background
 					// if induct rate is lower than sort or lower than minimum
 
-				});
+				}); // document Ready!!...
 
 
 
@@ -532,6 +565,11 @@
 				startTimer(1*60); // 4 minutes in seconds
 
 				//Credits to Philip M from codingforum
+
+
+
+
+
 
 
 				// NOTES
