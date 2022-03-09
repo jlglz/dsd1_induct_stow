@@ -327,7 +327,7 @@
 					margin:0 0 20px;
 					color:  #777;
 				}
-				button {
+				button, #calcMinReqFlowBtn {
 					/*border:solid 1px #ccc;*/
 					-webkit-border-radius: 3px;
 					-moz-border-radius: 3px;
@@ -492,34 +492,63 @@
 					// MINIMUM FLOW CALCULATOR
 
 					// on button click - calculate
-					$('#calcMinReqFlowBtn').on('click', function() {
+					// $('#calcMinReqFlowBtn').click(function() {
 
-					  	console.log("i was pressed");
-						var targetVolume = $('#targetVolume').val();
-						var beltRunTime = $('#beltRunTime').val();
-						var xtraMargin = $('#xtraMargin').val();
+					//   	console.log("i was pressed");
+					// 	var targetVolume = $('#targetVolume').val();
+					// 	var beltRunTime = $('#beltRunTime').val();
+					// 	var xtraMargin = $('#xtraMargin').val();
 
 
-						function calculateMinimumRequiredFlow(targetVolume, beltRunTime, xtraMargin){
-							var flowPerHour = parseInt(targetVolume) / parseInt(beltRunTime) + parseInt(xtraMargin);
-							var flowPerMin = flowPerHour / 60;
+					// 	function calculateMinimumRequiredFlow(targetVolume, beltRunTime, xtraMargin){
+					// 		var flowPerHour = parseInt(targetVolume) / parseInt(beltRunTime) + parseInt(xtraMargin);
+					// 		var flowPerMin = flowPerHour / 60;
 
-							console.log("I calc the results " + flowPerHour + " & " + flowPerMin);
-							return results;
-						}
+					// 		console.log("I calc the results " + flowPerHour + " & " + flowPerMin);
+					// 		return results;
+					// 	}
 
-						var minflowRate = calculateMinimumRequiredFlow();
-					  	console.log("i was pressed");
+					// 	var minflowRate = calculateMinimumRequiredFlow();
+					//   	console.log("i was pressed");
 
-					  	$(".fph_output").text('2000');
-					  	$(".fpm_output").text('10');
+					//   	$(".fph_output").text('2000');
+					//   	$(".fpm_output").text('10');
 
-					  	console.log(minflowRate);
-					});
+					//   	console.log(minflowRate);
+					// });
 
 
 					// animate induct color background
 					// if induct rate is lower than sort or lower than minimum
+
+					// This WILL work because we are listening on the 'document', 
+					    // for a click on an element with an ID of #test-element
+					    $(document).on("click","#calcMinReqFlowBtn",function() {
+					        // alert("click bound to document listening for #test-element");
+								  	console.log("i was pressed");
+							var targetVolume = $('#targetVolume').val();
+							var beltRunTime = $('#beltRunTime').val();
+							var xtraMargin = $('#xtraMargin').val();
+
+
+							function calculateMinimumRequiredFlow(targetVolume, beltRunTime, xtraMargin){
+								var flowPerHour = parseInt(targetVolume) / parseInt(beltRunTime) + parseInt(xtraMargin);
+								var flowPerMin = flowPerHour / 60;
+
+								console.log("I calc the results " + flowPerHour + " & " + flowPerMin);
+								return results;
+							}
+
+							var minflowRate = calculateMinimumRequiredFlow();
+						  	console.log("i was pressed");
+
+						  	$(".fph_output").text('2000');
+						  	$(".fpm_output").text('10');
+
+						  	console.log(minflowRate);
+					    });
+
+
 
 				}); // document Ready!!...
 
